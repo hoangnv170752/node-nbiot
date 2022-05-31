@@ -9,7 +9,7 @@ const excelToJson = require('convert-excel-to-json');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const morgan = require('morgan');
 const PORT = 5000;
 
 var storage = multer.diskStorage({
@@ -23,10 +23,18 @@ var storage = multer.diskStorage({
 });
 var uploads = multer({storage: storage});
 
-mongoose.connect('mongodb://localhost:27017/exceldemo',{useNewUrlParser:true})  
-    .then(() => console.log('connected to db'))  
-    .catch((err) => console.log(err))  
+// mongoose.connect('mongodb://localhost:27017/exceldemo',{useNewUrlParser:true})  
+//     .then(() => console.log('connected to db'))  
+//     .catch((err) => console.log(err))  
 
+mongoose.connect('mongodb://localhost:27017/exceldemo', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(()=> {
+        console.log('Database connected');
+    })
+    .catch((error)=> {
+        console.log('Error connecting to database');
+    });
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.resolve(__dirname, 'public')));
 

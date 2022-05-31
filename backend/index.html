@@ -12,16 +12,20 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
 	/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-dark">
-        <a class="nav-brand">Upload Excel file to MongoDB</a>
+    <nav class="navbar bg-light">
+        <a class="navbar-brand" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+            <img src="http://14.225.13.96:5555/assets/images/logo.png" alt="" width="30" height="44">
+            NB-IOT config  
+        </a>
     </nav>
     <div class="container">
-        <form action="/uploadfile" enctype="multipart/form-data" method="post">
-            <input class = "btn btn-info" type="file" name="uploadfile" accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' >
+        <form action="/uploadfile" enctype="multipart/form-data" method="post" class=" align-items-center">
+            <input class = "btn btn-info" type="file" name="uploadfile" accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' id="excel_file" >
             <input class = "btn btn-primary" type="submit" value="Upload Excel">
         </form>
     </div>
@@ -39,6 +43,37 @@
         }
         var reader = new FileReader();
         reader.readAsArrayBuffer(event.target.files[0]);
-        reader.onload = function(event){}
+        reader.onload = function(event){
+            var data = new Uint8Array(reader.result)
+            var work_book = XLSX.read(data, {type: 'array'})
+            var sheet_name = work_book.SheetNames;
+            var sheet_data = XLSX.utils.sheet_to_json(work_book.Sheets[sheet_name[0]], {header: 1});
+            if (sheet_data.length > 0 ){
+                var table_output = '<table class="table table-striped table-bordered">';
+                    for (var row = 0; row < sheet_data.length  ; row++){
+                        table_output += '<tr>';
+                        for (var cell = 0; cell < sheet_data[row].length; cell++){
+                            if(row == 0){
+                                table_output += '<th>' + sheet_data[row][cell] + '</th>'
+                            }
+                            else{
+                                table_output += '<td>' + sheet_data[row][cell] + '</td>'
+                            }
+                        }
+                        // if(row == sheet_data[row].length){
+                        //     table_output += '<td>'+ '<button class="btn btn-primary">' + '</button>' + '</td'
+                        // }
+                        for (var cell = 0; cell < sheet_data[row].length; cell++){
+                            for (var i = 0; i < sheet_data[row].length; i++){
+                                table_output += '<td>'+ '<button class="btn btn-primary">' + 'Config'+ '</button>' + '</td>';
+                            }
+                        }
+                        table_output += '</tr>';
+                    }
+                    table_output += '</table>';
+                    document.getElementById('excel_data').innerHTML = table_output;
+            }
+            excel_file.value = '';
+        }
     })
 </script>
