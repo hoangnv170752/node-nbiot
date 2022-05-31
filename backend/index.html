@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node NB-IOT</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+	/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <a class="nav-brand">Upload Excel file to MongoDB</a>
+    </nav>
+    <div class="container">
+        <form action="/uploadfile" enctype="multipart/form-data" method="post">
+            <input class = "btn btn-info" type="file" name="uploadfile" accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' >
+            <input class = "btn btn-primary" type="submit" value="Upload Excel">
+        </form>
+    </div>
+    <div id="excel_data" class="mt-5"></div>
+</body>
+</html>
+
+<script>
+    const excel_file = document.getElementById('excel_file')
+    excel_file.addEventListener('change', (event) => {
+        if(!['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'].includes(event.target.files[0].type)){
+            document.getElementById('excel_data').innerHTML = '<div class="alert alert-danger">Only supporting file for excel</div>' ;    
+            excel_file.value = '';
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(event.target.files[0]);
+        reader.onload = function(event){}
+    })
+</script>
