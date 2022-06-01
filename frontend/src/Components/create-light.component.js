@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import LightForm from "./LightForm";
+import { Button, Row } from "react-bootstrap";
 
 // Createlight Component
 const Createlight = () => {
@@ -23,12 +24,17 @@ const onSubmit = lightObject => {
 	
 
 return(
-	<LightForm 
-        initialValues={formValues}
-        onSubmit={onSubmit}
-        enableReinitialize>
-        Add Light MAC
-	</LightForm>
+    <div className="container">
+        <LightForm 
+            initialValues={formValues}
+            onSubmit={onSubmit}
+            enableReinitialize>
+            Add Light MAC
+        </LightForm>
+    <div>
+
+    </div>
+    </div>
 )
 }
 

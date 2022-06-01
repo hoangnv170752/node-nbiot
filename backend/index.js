@@ -41,6 +41,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use('/lights', lightRoute)
 
+// SIGN IN
+app.post('./sign-in', (req, res) => {
+    
+})
+
+
 // PORT
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {

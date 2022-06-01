@@ -26,11 +26,10 @@ return (
 	<td>{project}</td>
 	<td>
 		<Link className="edit-link"
-		to={"/edit-light/" + _id}>
+		to={"/update-light/" + _id}>
 		    Edit
 		</Link>
-		<Button onClick={deleteLight}
-		size="sm" variant="danger">
+		<Button onClick={deleteLight} size="sm" variant="danger">
 		    Delete
 		</Button>
 	</td>

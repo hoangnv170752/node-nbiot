@@ -28,9 +28,9 @@ return (
 	<Table striped bordered hover>
 		<thead>
 		<tr>
-			<th>ID</th>
 			<th>NAME</th>
 			<th>MAC</th>
+			<th>PROJECT</th>
 			<th>Action</th>
 		</tr>
 		</thead>

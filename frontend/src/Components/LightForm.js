@@ -1,7 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { FormGroup, FormControl, Button } from "react-bootstrap";
+import { FormGroup, Button } from "react-bootstrap";
 
 const LightForm = (props) => {
     const validationSchema = Yup.object().shape({
@@ -50,7 +50,7 @@ return (
                 />
             </FormGroup>
             <Button variant="danger" size="lg"
-                block="block" type="submit">
+                block="block" type="submit" >
                 {props.children}
             </Button>
 		</Form>
