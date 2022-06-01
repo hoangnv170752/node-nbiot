@@ -6,12 +6,12 @@ import { FormGroup, FormControl, Button } from "react-bootstrap";
 const LightForm = (props) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Required"),
-        email: Yup.string()
-        .email("You have enter an invalid email address")
+        MAC: Yup.string()
+        // .email("You have enter an invalid email address")
         .required("Required"),
-        rollno: Yup.number()
-        .positive("Invalid roll number")
-        .integer("Invalid roll number")
+        project: Yup.string()
+        // .positive("Invalid roll number")
+        // .integer("Invalid roll number")
         .required("Required"),
 });
 console.log(props);
@@ -20,7 +20,7 @@ return (
 	<Formik {...props} validationSchema={validationSchema}>
 		<Form>
             <FormGroup>
-                ID
+                NAME
                 <Field name="name" type="text"
                     className="form-control" />
                 <ErrorMessage
@@ -30,21 +30,21 @@ return (
                 />
             </FormGroup>
             <FormGroup>
-                NAME
-                <Field name="email" type="text"
+                MAC
+                <Field name="MAC" type="text"
                     className="form-control" />
                 <ErrorMessage
-                name="email"
+                name="MAC"
                 className="d-block invalid-feedback"
                 component="span"
                 />
             </FormGroup>
             <FormGroup>
-                MAC
-                <Field name="rollno" type="number"
+                PROJECT
+                <Field name="project" type="text"
                     className="form-control" />
                 <ErrorMessage
-                name="rollno"
+                name="project"
                 className="d-block invalid-feedback"
                 component="span"
                 />

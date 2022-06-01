@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LightForm from "./LightForm";
 
-// EditStudent Component
 const Editlight = (props) => {
 const [formValues, setFormValues] = useState({
 	name: "",
-	email: "",
-	rollno: "",
+	MAC: "",
+	project: "",
 });
 	
 //onSubmit handler
@@ -34,8 +33,8 @@ useEffect(() => {
 		+ props.match.params.id
 	)
 	.then((res) => {
-		const { name, email, rollno } = res.data;
-		setFormValues({ name, email, rollno });
+		const { name, MAC, project } = res.data;
+		setFormValues({ name, MAC, project });
 	})
 	.catch((err) => console.log(err));
 }, []);

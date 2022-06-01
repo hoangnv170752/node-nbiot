@@ -6,7 +6,7 @@ import LightForm from "./LightForm";
 // Createlight Component
 const Createlight = () => {
 const [formValues, setFormValues] =
-	useState({ name: '', email: '', rollno: '' })
+	useState({ name: '', MAC: '', project: '' })
 // onSubmit handler
 const onSubmit = lightObject => {
 	axios.post(

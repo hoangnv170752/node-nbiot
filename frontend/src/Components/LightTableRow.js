@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const LightTableRow = (props) => {
-const { _id, name, email, rollno } = props.obj;
+const { _id, name, MAC, project } = props.obj;
 
 const deleteLight = () => {
 	axios
@@ -22,8 +22,8 @@ const deleteLight = () => {
 return (
 	<tr>
 	<td>{name}</td>
-	<td>{email}</td>
-	<td>{rollno}</td>
+	<td>{MAC}</td>
+	<td>{project}</td>
 	<td>
 		<Link className="edit-link"
 		to={"/edit-light/" + _id}>

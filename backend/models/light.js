@@ -5,11 +5,11 @@ var lightSchema = new Schema({
     name: {
         type: String
     },
-    email: {
+    MAC: {
         type: String
     },
-    rollno: {
-        type: Number
+    project: {
+        type: String
     }
 }, {
     collection: 'lights'
