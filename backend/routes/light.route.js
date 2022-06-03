@@ -1,11 +1,12 @@
 let mongoose = require("mongoose");
 express = require("express");
 router = express.Router();
-
-// Student Model
+const axios = require("axios");
+let csvToJson = require('convert-csv-to-json');
+let fileInputName = 'myInput.csv';
+let fileOutputName = 'myOutput.json';
 let lightSchema = require("../models/light");
 
-// CREATE Student
 router.post("/create-light", (req, res, next) => {
     lightSchema.create(req.body, (error, data) => {
         if (error) {
@@ -76,5 +77,28 @@ lightSchema.findByIdAndRemove(
 	}
 });
 });
+// Send Lights' excel file 
+router.post("/config-light", (req, res, next) => {
+    csvToJson.generateJsonFileFromCsv(fileInputName, fileOutputName);
+	lightSchema.create(req.body, (error, data) => {
+        if (error) {
+        return next(error);
+        } else {
+        console.log(data);
+        res.json(data);
+        }
+    });
+});
+// Add light data 
+axios
+	.get("http://localhost:5000/lights/")
+	.then(res => {
+		console.log(`status ${res.status}`);
+		console.log(res);
+	})
+	.catch(error => {
+		console.log(error);
+	});
+
 
 module.exports = router;

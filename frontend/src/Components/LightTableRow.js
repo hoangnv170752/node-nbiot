@@ -32,6 +32,9 @@ return (
 		<Button onClick={deleteLight} size="sm" variant="danger">
 		    Delete
 		</Button>
+		<Button size = "sm" variant="success" class="ml-1">
+			Send MQTT
+		</Button>
 	</td>
 	</tr>
 );

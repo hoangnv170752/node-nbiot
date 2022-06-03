@@ -2,40 +2,64 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LightForm from "./LightForm";
-import { Button, Row } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import { FormControl, InputGroup } from "react-bootstrap";
 
 // Createlight Component
 const Createlight = () => {
-const [formValues, setFormValues] =
-	useState({ name: '', MAC: '', project: '' })
-// onSubmit handler
-const onSubmit = lightObject => {
-	axios.post(
-'http://localhost:5000/lights/create-light',
-	lightObject)
-	.then(res => {
-		if (res.status === 200)
-		alert('Light successfully created')
-		else
-		Promise.reject()
-	})
-	.catch(err => alert('Something went wrong'))
-}
-	
+    const [formValues, setFormValues] =
+        useState({ name: '', MAC: '', project: '' })
+    // onSubmit handler
+    const onSubmit = lightObject => {
+        axios.post(
+        'http://localhost:5000/lights/create-light',
+        lightObject)
+        .then(res => {
+            if (res.status === 200)
+            alert('Light successfully created')
+            else
+            Promise.reject()
+        })
+        .catch(err => alert('Something went wrong'))
+    }
+	const onSubmitfile = lightObject => {
+        
+        axios.post(
+        'http://localhost:5000/lights/config-light',
+        lightObject)
+        .then(res => {
+            if (res.status === 200)
+            alert('Add file lights successfully')
+            else
+            Promise.reject()
+        })
+        .catch(err => alert('Something went wrong'))
+    }
 
-return(
-    <div className="container">
-        <LightForm 
-            initialValues={formValues}
-            onSubmit={onSubmit}
-            enableReinitialize>
-            Add Light MAC
-        </LightForm>
-    <div>
+    return(
+        <div className="container">
+            <LightForm 
+                initialValues={formValues}
+                onSubmit={onSubmit}
+                enableReinitialize>
+                Add Light MAC
+            </LightForm>
+            <Form>
+                <InputGroup action="/config-light" enctype="multipart/form-data" method="POST">
+                    <FormControl
+                        type="file" name="myFile"       
+                    />
+                    <FormControl
+                        type="submit" value="Upload a file"
+                    />
+                </InputGroup>
+            </Form>
+        <div>
 
-    </div>
-    </div>
-)
+        </div>
+        </div>
+    )
 }
+
 
 export default Createlight
