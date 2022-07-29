@@ -20,13 +20,13 @@ router.post("/create-light", (req, res, next) => {
 
 // READ lights
 router.get("/", (req, res) => {
-lightSchema.find((error, data) => {
-	if (error) {
-	return next(error);
-	} else {
-	res.json(data);
-	}
-});
+	lightSchema.find((error, data) => {
+		if (error) {
+		return next(error);
+		} else {
+		res.json(data);
+		}
+	});
 });
 
 // UPDATE light
@@ -34,13 +34,13 @@ router
 .route("/update-light/:id")
 // Get Single Light
 .get((req, res) => {
-	lightSchema.findById(
-		req.params.id, (error, data) => {
-	if (error) {
-		return next(error);
-	} else {
-		res.json(data);
-	}
+		lightSchema.findById(
+			req.params.id, (error, data) => {
+		if (error) {
+			return next(error);
+		} else {
+			res.json(data);
+		}
 	});
 })
 
@@ -63,7 +63,7 @@ router
 	);
 });
 
-
+//Delete Light Data
 router.delete("/delete-light/:id",
 (req, res, next) => {
 lightSchema.findByIdAndRemove(
@@ -100,5 +100,6 @@ axios
 		console.log(error);
 	});
 
+//sign in with account
 
 module.exports = router;

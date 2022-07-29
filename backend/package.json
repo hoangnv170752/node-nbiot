@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Nb-iot",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,13 +17,19 @@
     "convert-excel-to-json": "^1.7.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "express-openid-connect": "^2.8.0",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.3",
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.4-lts.1",
     "nodemon": "^2.0.16",
+    "passport": "^0.6.0",
     "read-excel-file": "^5.3.3"
   }
 }

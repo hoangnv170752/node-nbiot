@@ -27,12 +27,12 @@ const Lightlist = () => {
         <div className="table-wrapper">
         <Table striped bordered hover>
             <thead>
-            <tr>
-                <th>NAME</th>
-                <th>MAC</th>
-                <th>PROJECT</th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>NAME</th>
+                    <th>MAC</th>
+                    <th>PROJECT</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>{DataTable()}</tbody>
         </Table>

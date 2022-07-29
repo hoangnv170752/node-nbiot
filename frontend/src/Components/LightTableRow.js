@@ -18,7 +18,15 @@ const deleteLight = () => {
 	})
 	.catch((err) => alert("Something went wrong"));
 };
-
+const sendLight = () => {
+	axios.post("http://localhost:5000/lights/create-light/" + _id)
+	.then((res) => {
+		if (res.status === 200) {
+			alert("Light successfully added");
+			window.location.reload();
+		} else Promise.reject();
+	})
+}
 return (
 	<tr>
 	<td>{name}</td>
@@ -32,7 +40,7 @@ return (
 		<Button onClick={deleteLight} size="sm" variant="danger">
 		    Delete
 		</Button>
-		<Button size = "sm" variant="success" class="ml-1">
+		<Button onClick={sendLight} size = "sm" variant="success" class="ml-1">
 			Send MQTT
 		</Button>
 	</td>

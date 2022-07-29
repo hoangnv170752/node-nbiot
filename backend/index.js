@@ -1,7 +1,26 @@
 const express = require('express');
 const app = express();
-
+require('dotenv').config();
 app.set('view engine','ejs');  
+// const { auth, requiresAuth } = require('express-openid-connect');
+
+// app.use(
+//   auth({
+//     issuerBaseURL: process.env.ISSUER_BASE_URL,
+//     baseURL: process.env.BASE_URL,
+//     clientID: process.env.CLIENT_ID,
+//     secret: process.env.SECRET,
+//     idpLogout: true,
+//   })
+// );
+
+// app.get('/', (req, res) => {
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Not logged in');
+// });
+// app.get('/create-light', requiresAuth(), (req, res) => {
+//   res.send(JSON.stringify(req.oidc.user))
+// });
+
 
 let dbConfig = require('./database/db');
 const cors = require('cors');
@@ -9,17 +28,21 @@ const multer = require('multer');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const lightRoute = require('../backend/routes/light.route');
+let userSchema = require("./models/user");
+// const { default: App } = require('../frontend/src/App');
 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './public/uploads');
-    },
-    // destination: './public/uploads',
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    }
+
+const fileStoreEngine = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, "./logs");
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.originalname);
+  }
+})
+const upload = multer({
+  storage: fileStoreEngine
 });
-var upload = multer({storage: storage});
 
 // Configure mongoDB Database
 // mongoose.set('useNewUrlParser', true);
@@ -36,6 +59,8 @@ mongoose.connect(dbConfig.db).then(() => {
     console.log('Could not connect to database : ' + error)
   }
 )
+app.use(express.urlencoded({extended: false}));
+app.use(express.json({extended: false}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
@@ -55,7 +80,30 @@ app.post('/lights/config-light', upload.single('myFile'), (req, res, next) => {
   }
   res.send(file)
 })
+app.post('/upload', upload.single('file'),(req,res) => {
+  console.log('Upload API')
+  if(!req.file){
+      res.status(400).send("Error: no files found")
+  }
+  const blob = firebase.bucket.file(req.file.originalname)
 
+  const blobWriter = blob.createWriteStream({
+      metadata: {
+          contentType: req.file.minitype
+      }
+  })
+  blobWriter.on('error', (err) => {
+      console.log(err)
+  })
+  blobWriter.on('finish', () => {
+      res.status(200).send('Uploaded file')
+  })
+  blobWriter.end(req.file.buffer)
+})
+app.post('/single', upload.single('file'),(req,res) => {
+  console.log(req.file);
+  res.send('Single file upload send');
+});
 // PORT
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
@@ -66,7 +114,42 @@ const server = app.listen(port, () => {
 app.use((req, res, next) => {
   res.status(404).send('Error 404!')
 });
-  
+//sign-in 
+app.post("/login", (req, res) => {
+  const {email, password} = req.body;
+  userSchema.findOne({ email: email},(err, user) => {
+    if(user){
+        if(password === user.password){
+            res.send({message: 'login successfully', user: user})
+        }else {
+            res.send({message: "wrong credentials"})
+        }
+    }else {res.send("not register")}
+  })
+});
+//sign-up
+app.post("/signup", (req, res) => {
+  console.log(req.body)
+  const { name , email, password } = req.body;
+  user.findOne({
+    email: email,
+  }, (err, user) => {
+    if(user){
+      res.send({message: 'user already existed'})
+    }else {
+      const user = new user({name, email, password})
+      user.save(
+        err => {
+          if(err){
+          res.send(err)
+        } else {
+          res.send({message: "successful"})
+        }}
+      )
+    }
+  })
+})
+
 app.use(function (err, req, res, next) {
   console.error(err.message);
   if (!err.statusCode) err.statusCode = 500;
