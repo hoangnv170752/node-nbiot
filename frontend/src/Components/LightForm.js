@@ -13,6 +13,10 @@ const LightForm = (props) => {
         // .positive("Invalid roll number")
         // .integer("Invalid roll number")
         .required("Required"),
+        ip: Yup.string()
+        .required("Required"),
+        port: Yup.string()
+        .required("Required"),
 });
 console.log(props);
 return (
@@ -45,6 +49,26 @@ return (
                     className="form-control" />
                 <ErrorMessage
                 name="project"
+                className="d-block invalid-feedback"
+                component="span"
+                />
+            </FormGroup>
+            <FormGroup>
+                IP Server
+                <Field name="ip" type="text"
+                    className="form-control" />
+                <ErrorMessage
+                name="ip"
+                className="d-block invalid-feedback"
+                component="span"
+                />
+            </FormGroup>
+            <FormGroup>
+                PORT
+                <Field name="port" type="text"
+                    className="form-control" />
+                <ErrorMessage
+                name="port"
                 className="d-block invalid-feedback"
                 component="span"
                 />

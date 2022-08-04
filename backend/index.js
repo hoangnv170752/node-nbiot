@@ -2,24 +2,6 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 app.set('view engine','ejs');  
-// const { auth, requiresAuth } = require('express-openid-connect');
-
-// app.use(
-//   auth({
-//     issuerBaseURL: process.env.ISSUER_BASE_URL,
-//     baseURL: process.env.BASE_URL,
-//     clientID: process.env.CLIENT_ID,
-//     secret: process.env.SECRET,
-//     idpLogout: true,
-//   })
-// );
-
-// app.get('/', (req, res) => {
-//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Not logged in');
-// });
-// app.get('/create-light', requiresAuth(), (req, res) => {
-//   res.send(JSON.stringify(req.oidc.user))
-// });
 
 
 let dbConfig = require('./database/db');
@@ -71,7 +53,7 @@ app.post('./sign-in', (req, res) => {
     
 })
 // Upload file
-app.post('/lights/config-light', upload.single('myFile'), (req, res, next) => {
+app.post('/config-light', upload.single('myFile'), (req, res, next) => {
   const file = req.file
   if (!file) {
     const error = new Error('Please upload a file')

@@ -7,6 +7,8 @@ const Editlight = (props) => {
 		name: "",
 		MAC: "",
 		project: "",
+		ip: "",
+		port: "",
 	});
 		
 	//onSubmit handler
@@ -33,8 +35,8 @@ const Editlight = (props) => {
 			+ props.match.params.id
 		)
 		.then((res) => {
-			const { name, MAC, project } = res.data;
-			setFormValues({ name, MAC, project });
+			const { name, MAC, project, ip , port} = res.data;
+			setFormValues({ name, MAC, project, ip , port});
 		})
 		.catch((err) => console.log(err));
 	}, []);

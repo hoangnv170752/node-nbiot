@@ -10,6 +10,12 @@ var lightSchema = new Schema({
     },
     project: {
         type: String
+    },
+    ip: {
+        type: String
+    },
+    port: {
+        type: String
     }
 }, {
     collection: 'lights'

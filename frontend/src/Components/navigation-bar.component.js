@@ -23,7 +23,7 @@ function NavigationBar() {
                             NB-IOT MAC
                         </Link>                   
                     </Navbar.Brand>
-                    <Nav className="justify-content-end">
+                    <Nav className="justify-content">
                         <Nav>
                         <Link to={"/create-light"}
                             className="nav-link">
@@ -45,7 +45,7 @@ function NavigationBar() {
                                 Log Out from <span>{user.nickname}</span>
                             </Link>
                         </Nav>
-                        
+
                     </Nav>
                 </Container>
             </Navbar>

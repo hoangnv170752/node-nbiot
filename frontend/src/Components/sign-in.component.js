@@ -56,8 +56,6 @@ const Login = () => {
             <Typography component="h1" variant="h5">
               Log out of NB - IOT management
             </Typography>
-            
-              
               <LogoutButton />
               <Copyright sx={{ mt: 5 }} />
               

@@ -25,12 +25,14 @@ const Lightlist = () => {
 
     return (
         <div className="table-wrapper">
-        <Table striped bordered hover>
+        <Table striped bordered hover size="sm">
             <thead>
                 <tr>
                     <th>NAME</th>
                     <th>MAC</th>
                     <th>PROJECT</th>
+                    <th>IP </th>
+                    <th>PORT</th>
                     <th>Action</th>
                 </tr>
             </thead>
