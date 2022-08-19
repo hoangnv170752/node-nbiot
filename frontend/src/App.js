@@ -22,6 +22,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LoginButton from "./Components/LoginButton";
+// import HookMqtt from "./Components/Mqtt-Client";
+// import Footer from "./Components/Footer";
 
 function Copyright(props) {
   return (
@@ -71,8 +73,6 @@ function App() {
         <Typography component="h1" variant="h5">
           Log in NB - IOT management 
         </Typography>
-        
-          
           <LoginButton />
           <Copyright sx={{ mt: 5 }} />
 
@@ -96,31 +96,34 @@ function App() {
     </LoadingScreen></div>;
   return (
   //  isAuthenticated && (
+    <div>
     <Router>
       <div className='App'>
-      <header className="App-header">
-        <NavigationBar />
-      </header>
-      <Container>
-        <Row>            
-        <Routes>
-              <Route path="/" element={<Login /> } />
-              {/* <Route path="/">{
-                user && user._id ? <Createlight />:<Login />
-              }<Createlight/></Route> */}
-              <Route path="/login" element={<Login /> } />
-              <Route path="/create-light"
-                element={ <Createlight />  } />
-              <Route path="/edit-light/:id"
-                element={<Editlight />} />
-              <Route path="/light-list"
-                element={<Lightlist />} />
-            </Routes>
-            </Row>
-      </Container>  
+        <header className="App-header">
+          <NavigationBar />
+        </header>
+        <Container>
+          <Row>            
+          <Routes>
+                <Route path="/" element={<Login /> } />
+                {/* <Route path="/">{
+                  user && user._id ? <Createlight />:<Login />
+                }<Createlight/></Route> */}
+                <Route path="/login" element={<Login /> } />
+                <Route path="/create-light"
+                  element={ <Createlight />  } />
+                <Route path="/edit-light/:id"
+                  element={<Editlight />} />
+                <Route path="/light-list"
+                  element={<Lightlist />} />
+                {/* <Route path="/mqtt"
+                  element={<HookMqtt />} /> */}
+              </Routes>
+              </Row>
+        </Container>  
       </div>
-
     </Router>
+    </div>
  //   ) 
   );
 };

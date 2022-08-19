@@ -6,6 +6,7 @@ let csvToJson = require('convert-csv-to-json');
 let fileInputName = 'myInput.csv';
 let fileOutputName = 'myOutput.json';
 let lightSchema = require("../models/light");
+const client = require('../services/mqtt');
 
 router.post("/create-light", (req, res, next) => {
     lightSchema.create(req.body, (error, data) => {
@@ -17,6 +18,7 @@ router.post("/create-light", (req, res, next) => {
         }
     });
 });
+// const topic = 'test/mqtt'
 
 // READ lights
 router.get("/", (req, res) => {
@@ -95,11 +97,22 @@ axios
 	.then(res => {
 		console.log(`status ${res.status}`);
 		console.log(res);
+	
 	})
 	.catch(error => {
 		console.log(error);
 	});
 
-//sign in with account
+//get single light data
+router.get("/light/:id", (req, res, next) => {
+	lightSchema.findById(
+		req.params.id, (error, data) => {
+	if (error) {
+		return next(error);
+	} else {
+		res.json(data);
+	}
+	});
+})
 
 module.exports = router;

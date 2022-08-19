@@ -4,11 +4,12 @@ import LightForm from "./LightForm";
 
 const Editlight = (props) => {
 	const [formValues, setFormValues] = useState({
-		name: "",
-		MAC: "",
+		Dev: "",
 		project: "",
-		ip: "",
-		port: "",
+		SERVER_ADDRESS: "",
+		SERVER_MQTT_PORT: "",
+		SERVER_MQTT_USER: "",
+		SERVER_MQTT_PASS: "",
 	});
 		
 	//onSubmit handler
@@ -35,8 +36,8 @@ const Editlight = (props) => {
 			+ props.match.params.id
 		)
 		.then((res) => {
-			const { name, MAC, project, ip , port} = res.data;
-			setFormValues({ name, MAC, project, ip , port});
+			const { Dev, project, SERVER_ADDRESS, SERVER_MQTT_PORT , SERVER_MQTT_USER, SERVER_MQTT_PASS} = res.data;
+			setFormValues({ Dev, project, SERVER_ADDRESS, SERVER_MQTT_PORT , SERVER_MQTT_USER, SERVER_MQTT_PASS});
 		})
 		.catch((err) => console.log(err));
 	}, []);

@@ -131,6 +131,20 @@ app.post("/signup", (req, res) => {
     }
   })
 })
+// var portrd = 1883
+// var rqird = "rqi6110971745359794"
+// var data = {}
+// data.Rqi = rqird
+// data.TYPCMD = "UpConfigServer"
+// data.SERVER_ADDRESS = "14.225.13.96"
+// data.SERVER_MQTT_PORT = portrd
+// data.SERVER_MQTT_USER = "sm"
+// data.SERVER_MQTT_PASS = "sm#@123"
+// data.CSE_ID = "rd"
+// data.CSE_NAME = "icc"
+// data.FROM_ID = "thunghiem"
+// data.APP_ID = "R.app2.thunghiem.com.vn"
+// console.log(data);
 
 app.use(function (err, req, res, next) {
   console.error(err.message);

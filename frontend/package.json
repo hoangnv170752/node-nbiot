@@ -14,11 +14,15 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^4.22.3",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.0",
+    "buffer": "^6.0.3",
     "dotenv": "^16.0.1",
     "font-awesome": "^4.7.0",
     "formik": "^2.2.9",
+    "mqtt": "^4.3.7",
+    "mqtt-react-hooks": "^3.0.0-alpha.2",
     "react": "^18.1.0",
     "react-bootstrap": "^2.0.0-rc.1",
     "react-dom": "^18.1.0",
@@ -29,6 +33,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.7",
     "web-vitals": "^2.1.4",
+    "websocket": "^1.0.34",
     "yup": "^0.32.11"
   },
   "scripts": {
@@ -54,5 +59,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
   }
 }

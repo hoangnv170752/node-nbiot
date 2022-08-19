@@ -8,13 +8,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import JSONPretty from 'react-json-pretty';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 // Createlight Component
 const Createlight = () => {
     const { user } = useAuth0();
     const [formValues, setFormValues] =
-        useState({ name: '', MAC: '', project: '', ip: '', port: ''})
-    // onSubmit handler
+        // useState({ Dev: '', project : '', SERVER_ADDRESS: '', SERVER_MQTT_PORT: '', SERVER_MQTT_USER: '', SERVER_MQTT_PASS:'' })
+        useState({ project : '', SERVER_ADDRESS: '', SERVER_MQTT_PORT: '', SERVER_MQTT_USER: '', SERVER_MQTT_PASS:'' , CSE_ID: '', CSE_NAME:'', FROM_ID: '', APP_ID: '' , MAC: '' })
+        // onSubmit handler
     const onSubmit = lightObject => {
         Axios.post(
         'http://localhost:5000/lights/create-light',
@@ -52,7 +52,7 @@ const Createlight = () => {
                       // Overwrite Axios's automatically set Content-Type
                       'Content-Type': 'application/json'
                     }
-                  } )
+                  })
         
                 .then(res => {
                     if (res.status === 200) {
@@ -74,30 +74,37 @@ const Createlight = () => {
     
     return(
         <div className="container" >
-            <div className="row ">
-                <div className="col mt-100">
-                    <LightForm 
-                        initialValues={formValues}
-                        onSubmit={onSubmit }
-                        enableReinitialize>
-                        Add Light MAC
-                        <ToastContainer />
-                    </LightForm>
-                </div>
-          
-                <div className="col mt-100">
-                    <Form onSubmit={handleSubmit}>
-                        INPUT MULTI LIGHTS FIELD 
-                        <FormControl
-                            type="text" name="myFile" onChange={(e) => setLight(e.target.value)} />
-                        
-                        <FormControl
-                            type="submit" value="Upload multi lights" onClick={() => onSubmitfile()}
-                        />
-                    </Form>
-              {/*  <JSONPretty data={user} /> */}
+            <div className="content-wrap">
+                <div className="row ">
+                    <div className="col mt-100">
+                        <LightForm 
+                            initialValues={formValues}
+                            onSubmit={onSubmit }
+                            enableReinitialize>
+                            Add Light MAC
+                        </LightForm>
+                        {/* <LightForm
+                            initialValues={formValues}
+                            onSubmit={onSubmit }
+                            enableReinitialize
+                        >
+                            Add Lights MAC
+                        </LightForm> */}
+                    </div>
+            
+                    <div className="col mt-100">
+                        <Form onSubmit={handleSubmit}>
+                            INPUT MULTI LIGHTS FIELD 
+                            <FormControl
+                                type="text" name="myFile" onChange={(e) => setLight(e.target.value)} />
+                            
+                            <FormControl
+                                type="submit" value="Upload multi lights" onClick={() => onSubmitfile()}
+                            />
+                        </Form> 
+                     {/* <JSONPretty data={user} /> */}
+                    </div> 
                 </div> 
-
             </div>
         </div>
         
