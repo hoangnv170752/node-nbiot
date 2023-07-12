@@ -9,7 +9,7 @@ var lightSchema = new Schema({
         type: String
     },
     SERVER_MQTT_PORT: {
-        type: String
+        type: Number
     },
     SERVER_MQTT_USER: {
         type: String

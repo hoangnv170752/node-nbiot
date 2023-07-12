@@ -72,7 +72,7 @@ router
 		  const db = client.db('IOT_PROJECT');
 		  
 		  const collection = db.collection('lights');
-		  const query = { MAC: req.body.MAC };
+		  const query = { MAC: req.body.Dev };
 		  const update = { $set: { STATUS: true } };
 	  
 		  await collection.updateOne(query, update);

@@ -136,24 +136,39 @@ client.on('message', (topic, payload) => {
       infoTest2.CSE_NAME = response.CSE_NAME
       infoTest2.FROM_ID = response.FROM_ID
       infoTest2.APP_ID = response.APP_ID
-      client.publish(topic2, JSON.stringify(infoTest2) , { qos: 0, retain: false }, (error) => {
-        if (error) {
-          console.log(error)
-        }
-      })
+      if (
+        infoTest2.SERVER_ADDRESS == messageId.SERVER_ADDRESS && 
+        infoTest2.SERVER_MQTT_PORT == messageId.SERVER_MQTT_PORT && 
+        infoTest2.SERVER_MQTT_USER == messageId.SERVER_MQTT_USER &&
+        infoTest2.SERVER_MQTT_PASS == messageId.SERVER_MQTT_PASS &&
+        infoTest2.CSE_ID == messageId.CSE_ID &&
+        infoTest2.CSE_NAME == messageId.CSE_NAME &&
+        infoTest2.FROM_ID == messageId.FROM_ID &&
+        infoTest2.APP_ID == messageId.APP_ID 
+      ) {
+        client.publish(topic2, JSON.stringify(infoTest2) , { qos: 0, retain: false }, (error) => {
+          if (error) {
+            console.log(error)
+          }
+        })
+        axios
+        .put("http://localhost:5000/lights/status-light", messageId)
+        .then(res => {
+          console.log(`status ${res.status}`);
+          console.log(messageId);
+          console.log(macID_dev1)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+      else {
+        alert("Lỗi , check lại đeee!!"); 
+      }
     }, 1000)
   }
-  else if(messageId.TYPCMD == 'UpConfigServerOk') {
-    axios
-    .put("http://localhost:5000/lights/status-light", messageId)
-    .then(res => {
-      console.log(`status ${res.status}`);
-      console.log(messageId);
-      console.log(macID_dev1)
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
+  // else if(messageId.TYPCMD == 'UpConfigServerOk') {
+   
+  // }
 })
 
