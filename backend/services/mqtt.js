@@ -3,13 +3,14 @@ const fs = require('fs');
 const axios = require('axios');
 const { Command} = require('commander');
 const { argv } = require('process');
+
 const program = new Command()
 program
   .option('-p, --protocol <type>', 'connect protocol: mqtt, mqtts, ws, wss. default is mqtt', 'mqtt')
   .parse(process.argv)
 
-const host = '112.137.129.232'
-const port = '3705'
+const host = '103.161.181.124'
+const port = '5005'
 
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 
@@ -81,10 +82,31 @@ client.on('message', (topic, payload) => {
   rec.Rqi = rqird
   rec.TYPCMD = "UpConfigServerOk"
 
-  console.log(info);
   if(messageId.TYPCMD == "GetConfigServer") {
+    var response = [];
+    axios
+      .post("http://localhost:5000/lights/lightask", messageId)
+      .then(res => {
+        response = res.data.msg[0];
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    
     setTimeout(() => {
-      client.publish(topic2, JSON.stringify(info) , { qos: 0, retain: false }, (error) => {
+      var infoTest = {}
+      infoTest.Rqi = rqird
+      infoTest.TYPCMD = "RspConfigServer"
+      infoTest.SERVER_ADDRESS = response.SERVER_ADDRESS
+      infoTest.SERVER_MQTT_PORT = response.SERVER_MQTT_PORT
+      infoTest.SERVER_MQTT_USER = response.SERVER_MQTT_USER
+      infoTest.SERVER_MQTT_PASS = response.SERVER_MQTT_PASS
+      infoTest.CSE_ID = response.CSE_ID
+      infoTest.CSE_NAME = response.CSE_NAME
+      infoTest.FROM_ID = response.FROM_ID
+      infoTest.APP_ID = response.APP_ID
+      client.publish(topic2, JSON.stringify(infoTest) , { qos: 0, retain: false }, (error) => {
+        console.log(infoTest)
         if (error) {
           console.log(error)
         }
@@ -92,14 +114,46 @@ client.on('message', (topic, payload) => {
     }, 1000)
   }
   else if(messageId.TYPCMD == 'UpConfigServer') {
+    var response = [];
+    axios
+      .post("http://localhost:5000/lights/lightask", messageId)
+      .then(res => {
+        response = res.data.msg[0];
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    
     setTimeout(() => {
-      client.publish(topic2, JSON.stringify(rec) , { qos: 0, retain: false }, (error) => {
+      var infoTest2 = {}
+      infoTest2.Rqi = rqird
+      infoTest2.TYPCMD = "UpConfigServerOk"
+      infoTest2.SERVER_ADDRESS = response.SERVER_ADDRESS
+      infoTest2.SERVER_MQTT_PORT = response.SERVER_MQTT_PORT
+      infoTest2.SERVER_MQTT_USER = response.SERVER_MQTT_USER
+      infoTest2.SERVER_MQTT_PASS = response.SERVER_MQTT_PASS
+      infoTest2.CSE_ID = response.CSE_ID
+      infoTest2.CSE_NAME = response.CSE_NAME
+      infoTest2.FROM_ID = response.FROM_ID
+      infoTest2.APP_ID = response.APP_ID
+      client.publish(topic2, JSON.stringify(infoTest2) , { qos: 0, retain: false }, (error) => {
         if (error) {
           console.log(error)
         }
       })
     }, 1000)
   }
- 
+  else if(messageId.TYPCMD == 'UpConfigServerOk') {
+    axios
+    .put("http://localhost:5000/lights/status-light", messageId)
+    .then(res => {
+      console.log(`status ${res.status}`);
+      console.log(messageId);
+      console.log(macID_dev1)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
 })
 

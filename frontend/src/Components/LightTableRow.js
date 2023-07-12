@@ -5,10 +5,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FormGroup, Button } from "react-bootstrap";
 // import { useMqttState } from 'mqtt-react-hooks';
 // import mqtt from 'mqtt';
-
-
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 const LightTableRow = (props) => {
-	const { _id, project, SERVER_ADDRESS, SERVER_MQTT_PORT, SERVER_MQTT_USER, SERVER_MQTT_PASS, CSE_ID, CSE_NAME, FROM_ID, APP_ID, MAC} = props.obj;
+	const { _id, project, SERVER_ADDRESS, SERVER_MQTT_PORT, SERVER_MQTT_USER, SERVER_MQTT_PASS, CSE_ID, CSE_NAME, FROM_ID, APP_ID, MAC, STATUS} = props.obj;
 	// const [connectionStatus, setConnectionStatus] = React.useState(false);
   	// const [messages, setMessages] = React.useState([]);
 
@@ -76,46 +82,23 @@ const LightTableRow = (props) => {
 	//   }
 
 		return (
-			<tr>
+			<TableRow>
 			{/* <td>{Dev}</td> */}
-			<td>{project}</td>
-			<td>{SERVER_ADDRESS}</td>
-			<td>{SERVER_MQTT_PORT}</td>
-			<td>{SERVER_MQTT_USER}</td>
-			<td>{SERVER_MQTT_PASS}</td>
-			<td>{CSE_ID}</td>
-			<td>{CSE_NAME}</td>
-			<td>{FROM_ID}</td>
-			<td>{APP_ID}</td>
-			<td>{MAC}</td>
-			<td>
-				{/* <Link className="edit-link"
-				to={"/update-light/" + _id}>
-					Edit
-				</Link> */}
-				<div className="row">
-					<div className="col">
-						<Button onClick={deleteLight } size="sm" variant="danger">
-							Delete
-							<ToastContainer />
-						</Button>
-					</div>
-					{/* <div className="col">
-						<Form>
-							<Field type="text" className="form-control" onChange = {(e) => setIp(e.target.value)} />
-						</Form>
-					</div>	 */}
-					<div className="col mx-auto">
-						<Button onClick={HttpConfig} size="sm" variant="success" class="ml-1">
-							Send
-						</Button>
-					</div>
-					<div>
-					
-					</div>
-				</div>
-			</td>
-			</tr>
+			<TableCell>{project}</TableCell>
+			<TableCell>{SERVER_ADDRESS}</TableCell>
+			<TableCell>{SERVER_MQTT_PORT}</TableCell>
+			<TableCell>{SERVER_MQTT_USER}</TableCell>
+			<TableCell>{SERVER_MQTT_PASS}</TableCell>
+			<TableCell>{CSE_ID}</TableCell>
+			<TableCell>{CSE_NAME}</TableCell>
+			<TableCell>{FROM_ID}</TableCell>
+			<TableCell>{APP_ID}</TableCell>
+			<TableCell>{MAC}</TableCell>
+			<TableCell>      
+				<Chip label = {STATUS.toString()} variant="outlined"  color = "success" />
+			</TableCell>
+			
+			</TableRow>
 		);
 	};
 

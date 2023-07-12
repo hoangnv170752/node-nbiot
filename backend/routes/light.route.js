@@ -7,13 +7,14 @@ let fileInputName = 'myInput.csv';
 let fileOutputName = 'myOutput.json';
 let lightSchema = require("../models/light");
 const client = require('../services/mqtt');
+const MongoClient = require("mongodb").MongoClient;
 
+var url = "mongodb+srv://hoangpresident:egoistic99@backend.pbxpq.mongodb.net/";
 router.post("/create-light", (req, res, next) => {
     lightSchema.create(req.body, (error, data) => {
         if (error) {
         return next(error);
         } else {
-        console.log(data);
         res.json(data);
         }
     });
@@ -44,25 +45,48 @@ router
 			res.json(data);
 		}
 	});
-})
+});
 
-// Update Light Data
-.put((req, res, next) => {
-	lightSchema.findByIdAndUpdate(
-	req.params.id,
-	{
-		$set: req.body,
-	},
-	(error, data) => {
-		if (error) {
-		return next(error);
-		console.log(error);
-		} else {
-		res.json(data);
-		console.log("Light updated successfully !");
+router.post("/lightask", (req, res, next) => {
+	async function findByName(MAC) {
+		try {
+		  const light = await lightSchema.find({ MAC });
+		  res.status(200).json({ msg: light });
+		  return light;
+		} catch (error) {
+		  console.error(error);
+		  res.status(500).json({ error: 'Internal Server Error' });
+		  throw new Error('Error finding people by name');
 		}
 	}
-	);
+	findByName(req.body.Dev)
+});
+
+router
+.route("/status-light")
+// Update Light Data
+.put((req, res, next) => {
+	async function updateDocument(req, res) {
+		try {
+		  const client = await MongoClient.connect(url);
+		  const db = client.db('IOT_PROJECT');
+		  
+		  const collection = db.collection('lights');
+		  const query = { MAC: req.body.MAC };
+		  const update = { $set: { STATUS: true } };
+	  
+		  await collection.updateOne(query, update);
+	  
+		  res.status(200).json({ msg: req.body });
+		  
+		  client.close();
+		} catch (error) {
+		  console.error(error);
+		  res.status(500).json({ error: 'Internal Server Error' });
+		}
+	}
+	updateDocument(req, res);
+	
 });
 
 //Delete Light Data
@@ -86,7 +110,6 @@ router.post("/config-light", (req, res, next) => {
         if (error) {
         return next(error);
         } else {
-        console.log(data);
         res.json(data);
         }
     });

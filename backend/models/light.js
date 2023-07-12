@@ -31,6 +31,10 @@ var lightSchema = new Schema({
     },
     MAC: {
         type: String
+    },
+    STATUS: {
+        type: Boolean,
+        default: false
     }
 }, {
     collection: 'lights'
