@@ -88,30 +88,33 @@ client.on('message', (topic, payload) => {
       .post("http://localhost:5000/lights/lightask", messageId)
       .then(res => {
         response = res.data.msg[0];
+        console.log(response)
       })
       .catch(error => {
         console.log(error);
       });
-    
     setTimeout(() => {
       var infoTest = {}
-      infoTest.Rqi = rqird
-      infoTest.TYPCMD = "RspConfigServer"
-      infoTest.SERVER_ADDRESS = response.SERVER_ADDRESS
-      infoTest.SERVER_MQTT_PORT = response.SERVER_MQTT_PORT
-      infoTest.SERVER_MQTT_USER = response.SERVER_MQTT_USER
-      infoTest.SERVER_MQTT_PASS = response.SERVER_MQTT_PASS
-      infoTest.CSE_ID = response.CSE_ID
-      infoTest.CSE_NAME = response.CSE_NAME
-      infoTest.FROM_ID = response.FROM_ID
-      infoTest.APP_ID = response.APP_ID
-      client.publish(topic2, JSON.stringify(infoTest) , { qos: 0, retain: false }, (error) => {
-        console.log(infoTest)
-        if (error) {
-          console.log(error)
-        }
-      })
+      if(response != null) {
+        infoTest.Rqi = rqird
+        infoTest.TYPCMD = "RspConfigServer"
+        infoTest.SERVER_ADDRESS = response.SERVER_ADDRESS
+        infoTest.SERVER_MQTT_PORT = response.SERVER_MQTT_PORT
+        infoTest.SERVER_MQTT_USER = response.SERVER_MQTT_USER
+        infoTest.SERVER_MQTT_PASS = response.SERVER_MQTT_PASS
+        infoTest.CSE_ID = response.CSE_ID
+        infoTest.CSE_NAME = response.CSE_NAME
+        infoTest.FROM_ID = response.FROM_ID
+        infoTest.APP_ID = response.APP_ID
+        client.publish(topic2, JSON.stringify(infoTest) , { qos: 0, retain: false }, (error) => {
+          console.log(infoTest)
+          if (error) {
+            console.log(error)
+          }
+        })}
+      console.log(infoTest);
     }, 1000)
+
   }
   else if(messageId.TYPCMD == 'UpConfigServer') {
     var response = [];
