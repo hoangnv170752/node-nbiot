@@ -25,6 +25,7 @@
     "mqtt-react-hooks": "^3.0.0-alpha.2",
     "react": "^18.1.0",
     "react-bootstrap": "^2.0.0-rc.1",
+    "react-csv": "^2.2.2",
     "react-dom": "^18.1.0",
     "react-file-manager-ui": "^1.1.0",
     "react-json-pretty": "^2.2.0",

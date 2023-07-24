@@ -81,28 +81,20 @@ const Createlight = () => {
                             initialValues={formValues}
                             onSubmit={onSubmit }
                             enableReinitialize>
-                            Add Light MAC
+                            Thêm 1 đèn
                         </LightForm>
-                        {/* <LightForm
-                            initialValues={formValues}
-                            onSubmit={onSubmit }
-                            enableReinitialize
-                        >
-                            Add Lights MAC
-                        </LightForm> */}
                     </div>
             
                     <div className="col mt-100">
                         <Form onSubmit={handleSubmit}>
-                            INPUT MULTI LIGHTS FIELD 
+                            Nhập dữ liệu nhiều đèn dưới dạng JSON
                             <FormControl
                                 type="text" name="myFile" onChange={(e) => setLight(e.target.value)} />
                             
                             <FormControl
-                                type="submit" value="Upload multi lights" onClick={() => onSubmitfile()}
+                                type="submit" value="Thêm nhiều đèn" onClick={() => onSubmitfile()}
                             />
                         </Form> 
-                     {/* <JSONPretty data={user} /> */}
                     </div> 
                 </div> 
             </div>
