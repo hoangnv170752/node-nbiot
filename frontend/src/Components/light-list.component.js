@@ -4,8 +4,12 @@ import { Table } from "react-bootstrap";
 import LightTableRow from "./LightTableRow";
 import Footer from './footer.component';
 import './light.css';
-import { TableHead, TableRow, TableContainer } from "@mui/material";
+import { TableHead, TableRow, TableContainer, Button } from "@mui/material";
 import Paper from '@mui/material/Paper';
+import { CSVLink } from "react-csv";
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import DownloadIcon from '@mui/icons-material/Download';
 
 const Lightlist = () => {
     const [lights, setLights] = useState([]);
@@ -31,6 +35,13 @@ const Lightlist = () => {
         <div className = "page-container">
             <div className="content-wrap">
                 <div className="">
+                    <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                        <Fab variant="extended" size="small" color="primary" aria-label="add">
+                            <DownloadIcon sx={{ mr: 1 }} />
+                            <CSVLink data={lights} style={{color: "white"}}>Tải xuống dữ liệu đèn</CSVLink>
+                        </Fab>
+                    </Box>
+
                     <TableContainer component={Paper}>
                         <Table striped bordered hover size="sm">
                             <TableHead>
@@ -46,6 +57,7 @@ const Lightlist = () => {
                                     <th>APP_ID</th>
                                     <th>MAC</th>
                                     <th>STATUS Light</th>
+                                    <th>Action</th>
                                 </TableRow>
                             </TableHead>
                             <tbody>{DataTable()}</tbody>

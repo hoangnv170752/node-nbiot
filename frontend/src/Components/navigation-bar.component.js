@@ -27,14 +27,14 @@ function NavigationBar() {
                         <Nav>
                         <Link to={"/create-light"}
                             className="nav-link">
-                            Create Light
+                            Thêm đèn
                         </Link>
                         </Nav>
 
                         <Nav>
                         <Link to={"/light-list"}
                             className="nav-link">
-                            Light List
+                            Danh sách đèn
                         </Link>
                         </Nav>                        
                         <Nav>
@@ -42,7 +42,7 @@ function NavigationBar() {
                             className="nav-link"
                             >
                                 <LogoutIcon />
-                                Log Out from <span>{user.nickname}</span>
+                                Đăng xuất khỏi nick <span>{user.nickname}</span>
                             </Link>
                         </Nav>
 
