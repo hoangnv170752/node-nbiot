@@ -11,12 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const uri='http://localhost:3000/create-light';
 
 root.render(
-  <Auth0Provider
-    domain= {domain}
-    clientId= {clientId}
-    redirectUri={uri}>
+  // <Auth0Provider
+  //   domain= {domain}
+  //   clientId= {clientId}
+  //   redirectUri={uri}>
     <App />
-  </Auth0Provider> 
+  // </Auth0Provider> 
 );
 
 // If you want to start measuring performance in your app, pass a function

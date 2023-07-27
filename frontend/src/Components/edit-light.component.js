@@ -16,7 +16,7 @@ const Editlight = (props) => {
 	const onSubmit = (lightObject) => {
 		axios
 		.put(
-			"http://localhost:5000/lights/update-light/" +
+			"http://103.160.2.183:5000/lights/update-light/" +
 			props.match.params.id,
 			lightObject
 		)
@@ -32,7 +32,7 @@ const Editlight = (props) => {
 	useEffect(() => {
 		axios
 		.get(
-			"http://localhost:5000/lights/update-light/"
+			"http://103.160.2.183:5000/lights/update-light/"
 			+ props.match.params.id
 		)
 		.then((res) => {

@@ -12,7 +12,7 @@ import  Avatar from "@mui/material/Avatar";
 import { useAuth0 } from '@auth0/auth0-react';
 
 function NavigationBar() {
-    const { user } = useAuth0();
+    // const { user } = useAuth0();
 
     return (
             <Navbar bg ="dark" variant = "dark">
@@ -42,7 +42,7 @@ function NavigationBar() {
                             className="nav-link"
                             >
                                 <LogoutIcon />
-                                Đăng xuất khỏi nick <span>{user.nickname}</span>
+                                {/* Đăng xuất khỏi nick <span>{user.nickname}</span> */}
                             </Link>
                         </Nav>
 

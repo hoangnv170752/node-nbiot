@@ -85,7 +85,7 @@ client.on('message', (topic, payload) => {
   if(messageId.TYPCMD == "GetConfigServer") {
     var response = [];
     axios
-      .post("http://localhost:5000/lights/lightask", messageId)
+      .post("http://103.160.2.183:5000/lights/lightask", messageId)
       .then(res => {
         response = res.data.msg[0];
         console.log(response)
@@ -119,7 +119,7 @@ client.on('message', (topic, payload) => {
   else if(messageId.TYPCMD == 'UpConfigServer') {
     var response = [];
     axios
-      .post("http://localhost:5000/lights/lightask", messageId)
+      .post("http://103.160.2.183:5000/lights/lightask", messageId)
       .then(res => {
         response = res.data.msg[0];
       })
@@ -155,7 +155,7 @@ client.on('message', (topic, payload) => {
           }
         })
         axios
-        .put("http://localhost:5000/lights/status-light", messageId)
+        .put("http://103.160.2.183:5000/lights/status-light", messageId)
         .then(res => {
           console.log(`status ${res.status}`);
           console.log(messageId);

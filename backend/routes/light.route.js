@@ -116,7 +116,7 @@ router.post("/config-light", (req, res, next) => {
 });
 // Add light data 
 axios
-	.get("http://localhost:5000/lights/")
+	.get("http://103.160.2.183:5000/lights/")
 	.then(res => {
 		console.log(`status ${res.status}`);
 		console.log(res);

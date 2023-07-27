@@ -40,10 +40,7 @@ function Copyright(props) {
 // App Component
 function App() {
   const theme = createTheme();
-
-  const { isLoading } = useAuth0();
-  const { isAuthenticated } = useAuth0();
-  if (isAuthenticated == false) return <ThemeProvider theme={theme}>
+<ThemeProvider theme={theme}>
   <Grid container component="main" sx={{ height: '100vh' }}>
     <CssBaseline />
     <Grid
@@ -80,20 +77,20 @@ function App() {
     </Grid>
   </Grid>
 </ThemeProvider>
-  if (isLoading) return <div>
-    <LoadingScreen
-      loading={true}
-      bgColor='#f1f1f1'
-      spinnerColor='#9ee5f8'
-      textColor='#676767'
-      logoSrc='http://14.225.13.96:5555/assets/images/logo.png'
-      text='A web application for managing lights'
-    > 
-      // ...
-      // here loadable content
-      // for example, async data
-      //<div>Loadable content</div>
-    </LoadingScreen></div>;
+  // if (isLoading) return <div>
+  //   <LoadingScreen
+  //     loading={true}
+  //     bgColor='#f1f1f1'
+  //     spinnerColor='#9ee5f8'
+  //     textColor='#676767'
+  //     logoSrc='http://14.225.13.96:5555/assets/images/logo.png'
+  //     text='A web application for managing lights'
+  //   > 
+  //     // ...
+  //     // here loadable content
+  //     // for example, async data
+  //     //<div>Loadable content</div>
+  //   </LoadingScreen></div>;
   return (
   //  isAuthenticated && (
     <div>
@@ -105,7 +102,7 @@ function App() {
         <Container>
           <Row>            
           <Routes>
-                <Route path="/" element={<Login /> } />
+                <Route path="/" element={<Createlight /> } />
                 {/* <Route path="/">{
                   user && user._id ? <Createlight />:<Login />
                 }<Createlight/></Route> */}

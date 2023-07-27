@@ -17,7 +17,7 @@ const Createlight = () => {
         // onSubmit handler
     const onSubmit = lightObject => {
         Axios.post(
-        'http://localhost:5000/lights/create-light',
+        'http://103.160.2.183:5000/lights/create-light',
         lightObject)
         .then(res => {
             if (res.status === 200) {
@@ -47,7 +47,7 @@ const Createlight = () => {
 	const onSubmitfile = () => {
         if(light != null) {
             Axios.post(
-                'http://localhost:5000/lights/create-light', light, {
+                'http://103.160.2.183:5000/lights/create-light', light, {
                     headers: {
                       // Overwrite Axios's automatically set Content-Type
                       'Content-Type': 'application/json'

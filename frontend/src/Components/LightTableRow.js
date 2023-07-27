@@ -31,7 +31,7 @@ const LightTableRow = (props) => {
 	const deleteLight = () => {
 		axios
 		.delete(
-		"http://localhost:5000/lights/delete-light/" + _id)
+		"http://103.160.2.183:5000/lights/delete-light/" + _id)
 		.then((res) => {
 			if (res.status === 200) {
 				toast.warning("Delete light successfully", {
@@ -45,7 +45,7 @@ const LightTableRow = (props) => {
 		.catch((err) => alert("Something went wrong"));
 	};
 	const HttpConfig = (context) => {
-		axios.get('http://localhost:5000/lights/light/' + _id)
+		axios.get('http://103.160.2.183:5000/lights/light/' + _id)
 			.then(
 				(res) => {
 					if (res.status === 200){

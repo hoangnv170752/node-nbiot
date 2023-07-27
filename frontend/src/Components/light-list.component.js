@@ -16,7 +16,7 @@ const Lightlist = () => {
 
     useEffect(() => {
         axios
-        .get("http://localhost:5000/lights/")
+        .get("http://103.160.2.183:5000/lights/")
         .then(({ data }) => {
             setLights(data);
         })
