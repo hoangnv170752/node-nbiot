@@ -32,8 +32,8 @@ const Lightlist = () => {
     };
 
     return (
-        <div className = "page-container">
-            <div className="content-wrap">
+        <div>
+            <div>
                 <div className="">
                     <Box sx={{ '& > :not(style)': { m: 1 } }}>
                         <Fab variant="extended" size="small" color="primary" aria-label="add">
@@ -43,7 +43,7 @@ const Lightlist = () => {
                     </Box>
 
                     <TableContainer component={Paper}>
-                        <Table striped bordered hover size="sm">
+                        <Table striped bordered hover>
                             <TableHead>
                                 <TableRow>
                                     <th>Project</th>

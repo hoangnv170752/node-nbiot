@@ -85,7 +85,7 @@ const Createlight = () => {
                         </LightForm>
                     </div>
             
-                    <div className="col mt-100">
+                    <div className="col mt-200 md-50">
                         <Form onSubmit={handleSubmit}>
                             Nhập dữ liệu nhiều đèn dưới dạng JSON
                             <FormControl

@@ -10,15 +10,7 @@
   color: #ffffff;
   }
   
-  .form-wrapper,
-  .table-wrapper {
-  max-width: 500px;
-  margin: 0 auto;
-  }
-  
-  .table-wrapper {
-  max-width: 700px;
-  }
+
   
   .edit-link {
   padding: 7px 10px;

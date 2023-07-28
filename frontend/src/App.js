@@ -99,7 +99,6 @@ function App() {
         <header className="App-header">
           <NavigationBar />
         </header>
-        <Container>
           <Row>            
           <Routes>
                 <Route path="/" element={<Createlight /> } />
@@ -117,7 +116,6 @@ function App() {
                   element={<HookMqtt />} /> */}
               </Routes>
               </Row>
-        </Container>  
       </div>
     </Router>
     </div>
