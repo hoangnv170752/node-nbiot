@@ -13,7 +13,7 @@ const Createlight = () => {
     const { user } = useAuth0();
     const [formValues, setFormValues] =
         // useState({ Dev: '', project : '', SERVER_ADDRESS: '', SERVER_MQTT_PORT: '', SERVER_MQTT_USER: '', SERVER_MQTT_PASS:'' })
-        useState({ project : '', SERVER_ADDRESS: '', SERVER_MQTT_PORT: '', SERVER_MQTT_USER: '', SERVER_MQTT_PASS:'' , CSE_ID: '', CSE_NAME:'', FROM_ID: '', APP_ID: '' , MAC: '' })
+        useState({ project : '', vendor: '', SERVER_ADDRESS: '', SERVER_MQTT_PORT: '', SERVER_MQTT_USER: '', SERVER_MQTT_PASS:'' , CSE_ID: '', CSE_NAME:'', FROM_ID: '', APP_ID: '' , MAC: '' })
         // onSubmit handler
     const onSubmit = lightObject => {
         Axios.post(
@@ -21,13 +21,16 @@ const Createlight = () => {
         lightObject)
         .then(res => {
             if (res.status === 200) {
-                // alert('Light successfully created') 
+                console.log(lightObject)
+                alert('Light successfully created') 
                 toast.success("Successful adding light !", {
                     position: toast.POSITION.TOP_CENTER
                 });
             }
-            else
-            Promise.reject()
+            else {
+                alert('Tạo đèn có vấn đề') 
+                Promise.reject()
+            }
         })
         .catch(err => alert('Something went wrong'))
     }
@@ -81,7 +84,7 @@ const Createlight = () => {
                             initialValues={formValues}
                             onSubmit={onSubmit }
                             enableReinitialize>
-                            Thêm 1 đèn
+                            Thêm 1 đèn vào dự án
                         </LightForm>
                     </div>
             

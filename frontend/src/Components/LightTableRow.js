@@ -12,15 +12,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import Tooltip from '@mui/material/Tooltip';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const LightTableRow = (props) => {
-	const { _id, project, SERVER_ADDRESS, SERVER_MQTT_PORT, SERVER_MQTT_USER, SERVER_MQTT_PASS, CSE_ID, CSE_NAME, FROM_ID, APP_ID, MAC, STATUS} = props.obj;
+	const { _id, project, vendor, SERVER_ADDRESS, SERVER_MQTT_PORT, SERVER_MQTT_USER, SERVER_MQTT_PASS, CSE_ID, CSE_NAME, FROM_ID, APP_ID, MAC, STATUS} = props.obj;
 	const [open, setOpen] = React.useState(false);
-
+	const [projectName, setProjectName] = React.useState('Rạng Đông');
 	const handleClickOpen = () => {
 	  setOpen(true);
 	};
@@ -57,12 +58,29 @@ const LightTableRow = (props) => {
 			)
 			.catch((err) => alert("Something went wrong"));		
 	}
+	const handleProjectName = (vendorId) => {
+		if (vendor === 0) {
+			setProjectName("Rang Dong")
+		} else if (vendor === 1) {
+			setProjectName("VNPT")
+		} else if (vendor === 2) {
+			setProjectName("Viettel")
+		}
+	}
+
+	React.useEffect(() => {
+		handleProjectName(vendor);
+	}, [])
 
 		return (
 			<>
 				<TableRow>
 					{/* <td>{Dev}</td> */}
-					<TableCell>{project}</TableCell>
+					<TableCell>{project}
+						<Tooltip title={`Dự án chiếu sáng tại: ${projectName}`}>
+							<Chip label={projectName} onClick={() => {}} variant="outlined"/>
+						</Tooltip>
+					</TableCell>
 					<TableCell>{SERVER_ADDRESS}</TableCell>
 					<TableCell>{SERVER_MQTT_PORT}</TableCell>
 					<TableCell>{SERVER_MQTT_USER}</TableCell>

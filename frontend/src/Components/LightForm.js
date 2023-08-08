@@ -8,6 +8,7 @@ const LightForm = (props) => {
         project: Yup.string()
         // .email("You have enter an invalid email address")
         .required("Required"),
+        vendor: Yup.string(),
         SERVER_ADDRESS: Yup.string()
         // .positive("Invalid roll number")
         // .integer("Invalid roll number")
@@ -44,16 +45,21 @@ return (
                 component="span"
                 />
             </FormGroup>
-            {/* <FormGroup>
-                Project
-                <Field name="project" type="text"
-                    className="form-control" />
+            <FormGroup>
+                Thuộc công ty (*VendorId)
+                {/* <Field name="vendor" type="select"
+                    className="form-control" /> */}
+                <Field as="select" name="vendor" className='form-control'>
+                    <option value="0">Rạng Đông</option>
+                    <option value="1">VNPT</option>
+                    <option value="2">Viettel</option>
+                </Field>
                 <ErrorMessage
-                name="project"
-                className="d-block invalid-feedback"
-                component="span"
+                    name="vendor"
+                    className="d-block invalid-feedback"
+                    component="span"
                 />
-            </FormGroup> */}
+            </FormGroup>
             <FormGroup>
                 Địa chỉ server
                 <Field name="SERVER_ADDRESS" type="text"
