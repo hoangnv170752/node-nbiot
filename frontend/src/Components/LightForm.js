@@ -8,7 +8,7 @@ const LightForm = (props) => {
         project: Yup.string()
         // .email("You have enter an invalid email address")
         .required("Required"),
-        vendor: Yup.string(),
+        vendor: Yup.string().required("Required"),
         SERVER_ADDRESS: Yup.string()
         // .positive("Invalid roll number")
         // .integer("Invalid roll number")
@@ -31,6 +31,11 @@ const LightForm = (props) => {
         .required("Required")
 });
 console.log(props);
+const options = [
+    { value: "0", label: "Rạng Đông" },
+    { value: "1", label: "VNPT" },
+    { value: "2", label: "Viettel" },
+  ];
 return (
 	<div className="form-wrapper">
 	<Formik {...props} validationSchema={validationSchema}>
@@ -50,9 +55,12 @@ return (
                 {/* <Field name="vendor" type="select"
                     className="form-control" /> */}
                 <Field as="select" name="vendor" className='form-control'>
-                    <option value="0">Rạng Đông</option>
-                    <option value="1">VNPT</option>
-                    <option value="2">Viettel</option>
+                    <option value=""> </option> {/* Empty option with no label */}
+                    {options.map(option => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
+                    ))}
                 </Field>
                 <ErrorMessage
                     name="vendor"
