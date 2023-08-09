@@ -31,6 +31,7 @@
     "react-file-manager-ui": "^1.1.0",
     "react-json-pretty": "^2.2.0",
     "react-loading-screen": "^0.0.17",
+    "react-qr-code": "^2.0.11",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.7",

@@ -13,9 +13,27 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import Tooltip from '@mui/material/Tooltip';
-
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import { makeStyles } from '@mui/styles';
+import QRCode from "react-qr-code";
 
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
+	display: 'flex',
+  	flexDirection: 'column',
+	alignItems: 'center', 
+  	justifyContent: 'center',  
+};
 const useStyles = makeStyles({
   cell: {
     maxWidth: 200, // Adjust this value to control the maximum width of the cell
@@ -32,6 +50,9 @@ const LightTableRow = (props) => {
 	const { _id, project, vendor, SERVER_ADDRESS, SERVER_MQTT_PORT, SERVER_MQTT_USER, SERVER_MQTT_PASS, CSE_ID, CSE_NAME, FROM_ID, APP_ID, MAC, STATUS} = props.obj;
 	const [open, setOpen] = React.useState(false);
 	const [projectName, setProjectName] = React.useState('Rạng Đông');
+	const [openQr, setOpenQr] = React.useState(false);
+	const handleOpenModal = () => setOpenQr(true);
+	const handleCloseModal = () => setOpenQr(false);
 	const handleClickOpen = () => {
 	  setOpen(true);
 	};
@@ -109,6 +130,9 @@ const LightTableRow = (props) => {
 							Xóa đèn
 							<ToastContainer />
 						</Button>
+						<Button  onClick={handleOpenModal} size="sm" variant="primary" style={{marginLeft: 10}}>
+							Tạo QR đèn
+						</Button>
 					</TableCell>
 				</TableRow>
 				<Dialog
@@ -129,6 +153,24 @@ const LightTableRow = (props) => {
 					<Button onClick={deleteLight} size="sm" variant="danger">Nhất quyết xóa</Button>
 					</DialogActions>
 				</Dialog>
+				<Modal
+					open={openQr}
+					onClose={handleCloseModal}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+				>
+					<Box sx={style}>
+						<Typography id="modal-modal-title" variant="h6" component="h2">
+							Thông tin MAC QR của Đèn
+						</Typography>
+						<QRCode
+							size={256}
+							style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+							value={MAC}
+							viewBox={`0 0 256 256`}
+						/>
+					</Box>
+				</Modal>
 			</>
 		);
 	};
