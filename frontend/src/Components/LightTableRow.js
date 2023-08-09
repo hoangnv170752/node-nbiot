@@ -14,6 +14,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import Tooltip from '@mui/material/Tooltip';
 
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  cell: {
+    maxWidth: 200, // Adjust this value to control the maximum width of the cell
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+  },
+});
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -71,6 +81,7 @@ const LightTableRow = (props) => {
 	React.useEffect(() => {
 		handleProjectName(vendor);
 	}, [])
+	const classes = useStyles();
 
 		return (
 			<>
@@ -87,11 +98,11 @@ const LightTableRow = (props) => {
 					<TableCell>{SERVER_MQTT_PASS}</TableCell>
 					<TableCell>{CSE_ID}</TableCell>
 					<TableCell>{CSE_NAME}</TableCell>
-					<TableCell>{FROM_ID}</TableCell>
+					<TableCell className={classes.cell}>{FROM_ID}</TableCell>
 					<TableCell>{APP_ID}</TableCell>
 					<TableCell>{MAC}</TableCell>
 					<TableCell>      
-						<Chip label = {STATUS.toString() == "true" ? "Đã cấu hình" : "Chưa cấu hình"} variant="filled"  color = "success" />
+						<Chip label = {STATUS.toString() === "true" ? "Đã cấu hình" : "Chưa cấu hình"} variant="filled"  color = {STATUS.toString() === "true" ? "success" : "warning"} />
 					</TableCell>
 					<TableCell>
 						<Button  onClick={handleClickOpen} size="sm" variant="danger">
