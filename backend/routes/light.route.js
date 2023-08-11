@@ -11,13 +11,29 @@ const MongoClient = require("mongodb").MongoClient;
 
 var url = "mongodb+srv://hoangpresident:egoistic99@backend.pbxpq.mongodb.net/";
 router.post("/create-light", (req, res, next) => {
-    lightSchema.create(req.body, (error, data) => {
-        if (error) {
-        return next(error);
-        } else {
-        res.json(data);
-        }
-    });
+	async function createLight(req, res) {
+		const client = await MongoClient.connect(url);
+		const db = client.db('IOT_PROJECT');
+		
+		const collection = db.collection('lights');
+		const query = { MAC: req.body.MAC };
+		const result = collection.findOne(query);
+		console.log(result);
+		if (result) {
+			res.status(400).json({
+				"msg": "MAC already has on the Database"
+			})
+		} else {
+			lightSchema.create(req.body, (error, data) => {
+				if (error) {
+				return next(error);
+				} else {
+				res.json(data);
+				}
+			});
+		}
+	}
+	createLight(req, res);
 });
 // const topic = 'test/mqtt'
 

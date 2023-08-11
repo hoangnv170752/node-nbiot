@@ -32,7 +32,7 @@ const Createlight = () => {
                 Promise.reject()
             }
         })
-        .catch(err => alert('Something went wrong'))
+        .catch(err => alert('Lỗi khi tạo đèn, có thể mac đã có trên hệ thống hoặc backend bị lỗi nha'))
     }
     // let formData = new FormData();
     const handleSubmit = (event) => {
