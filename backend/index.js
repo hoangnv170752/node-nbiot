@@ -87,7 +87,7 @@ app.post('/single', upload.single('file'),(req,res) => {
   res.send('Single file upload send');
 });
 // PORT
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })

@@ -8,6 +8,7 @@ let fileOutputName = 'myOutput.json';
 let lightSchema = require("../models/light");
 const client = require('../services/mqtt');
 const MongoClient = require("mongodb").MongoClient;
+const base64 = require("base64-js");
 
 var url = "mongodb+srv://hoangpresident:egoistic99@backend.pbxpq.mongodb.net/";
 router.post("/create-light", (req, res, next) => {
@@ -16,14 +17,15 @@ router.post("/create-light", (req, res, next) => {
 		const db = client.db('IOT_PROJECT');
 		
 		const collection = db.collection('lights');
+		console.log(req.body.MAC);
 		const query = { MAC: req.body.MAC };
 		const result = collection.findOne(query);
-		console.log(result);
-		if (result) {
-			res.status(400).json({
-				"msg": "MAC already has on the Database"
-			})
-		} else {
+		// console.log(result);
+		// if (result) {
+		// 	res.status(400).json({
+		// 		"msg": "MAC already has on the Database"
+		// 	})
+		// } else {
 			lightSchema.create(req.body, (error, data) => {
 				if (error) {
 				return next(error);
@@ -31,7 +33,7 @@ router.post("/create-light", (req, res, next) => {
 				res.json(data);
 				}
 			});
-		}
+		// }
 	}
 	createLight(req, res);
 });
@@ -153,5 +155,57 @@ router.get("/light/:id", (req, res, next) => {
 	}
 	});
 })
+
+router.get("/signinvnpt", (req, res, next) => {
+	let account = JSON.stringify({
+		"username": "vnptsmartlighting@gmail.com",
+		"password": "!yeE2_Fl01"
+	});
+	let config = {
+		method: 'post',
+		maxBodyLength: Infinity,
+		url: 'https://api-iot.vnpt.vn/auth/login',
+		headers: { 
+		  'Content-Type': 'application/json', 
+		  'Cookie': 'BIGipServerPool_14.225.41.69_30234=404202762.6774.0000'
+		},
+		data : account
+	};
+
+	axios.request(config)
+	.then((response) => {
+		token = response.data.content.Bearer;
+		console.log(token);
+
+		const configDevice = {
+		method: 'get',
+		maxBodyLength: Infinity,
+		url: 'https://api-iot.vnpt.vn/iotportal/device/token/SML',
+		headers: { 
+			'Authorization': `Bearer ${token}`, 
+			'Cookie': 'BIGipServerPool_14.225.41.69_30234=404202762.6774.0000'
+		}
+		};
+		return axios.request(configDevice);
+	})
+	.then((deviceResponse) => {
+		// Handle the response from the second request here
+		console.log(JSON.stringify(deviceResponse.data));
+		const encodedString = deviceResponse.data.content;
+		const parts = encodedString.split(".");
+		const encodedHeader = parts[0];
+		const padding = "=".repeat(4 - (encodedHeader.length % 4));
+		const paddedEncodedString = encodedHeader + padding;
+		// Decode from Base64
+		const decodedBytes = base64.toByteArray(paddedEncodedString);
+		const decodedString = Buffer.from(decodedBytes).toString("utf-8");
+		console.log(decodedString);
+		const header = JSON.parse(decodedString);
+		res.json(header);
+	})
+	.catch((error) => {
+		console.log(error);
+	});
+});
 
 module.exports = router;

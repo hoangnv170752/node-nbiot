@@ -41,13 +41,16 @@ const useStyles = makeStyles({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
   },
+  action: {
+	flexDirection: 'row',
+  }
 });
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const LightTableRow = (props) => {
-	const { _id, project, vendor, SERVER_ADDRESS, SERVER_MQTT_PORT, SERVER_MQTT_USER, SERVER_MQTT_PASS, CSE_ID, CSE_NAME, FROM_ID, APP_ID, MAC, STATUS} = props.obj;
+	const { _id, project, vendor, CLIENT_ID, SERVER_ADDRESS, SERVER_MQTT_PORT, SERVER_MQTT_USER, SERVER_MQTT_PASS, CSE_ID, CSE_NAME, FROM_ID, APP_ID, MAC, STATUS} = props.obj;
 	const [open, setOpen] = React.useState(false);
 	const [projectName, setProjectName] = React.useState('Rạng Đông');
 	const [openQr, setOpenQr] = React.useState(false);
@@ -108,12 +111,13 @@ const LightTableRow = (props) => {
 			<>
 				<TableRow>
 					{/* <td>{Dev}</td> */}
-					<TableCell>{project}
+					<TableCell className={classes.cell}>{project}
 						<Tooltip title={`Dự án chiếu sáng tại: ${projectName}`}>
 							<Chip label={projectName} onClick={() => {}} variant="outlined"/>
 						</Tooltip>
 					</TableCell>
 					<TableCell>{SERVER_ADDRESS}</TableCell>
+					<TableCell className={classes.cell}>{CLIENT_ID}</TableCell>
 					<TableCell>{SERVER_MQTT_PORT}</TableCell>
 					<TableCell>{SERVER_MQTT_USER}</TableCell>
 					<TableCell>{SERVER_MQTT_PASS}</TableCell>
@@ -125,7 +129,7 @@ const LightTableRow = (props) => {
 					<TableCell>      
 						<Chip label = {STATUS.toString() === "true" ? "Đã cấu hình" : "Chưa cấu hình"} variant="filled"  color = {STATUS.toString() === "true" ? "success" : "warning"} />
 					</TableCell>
-					<TableCell>
+					<TableCell className={classes.action}>
 						<Button  onClick={handleClickOpen} size="sm" variant="danger">
 							Xóa đèn
 							<ToastContainer />

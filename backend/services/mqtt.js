@@ -98,6 +98,7 @@ client.on('message', (topic, payload) => {
       if(response != null) {
         infoTest.Rqi = rqird
         infoTest.Vendor_ID = response.vendor
+        infoTest.CLIENTID = response.Client_Id
         infoTest.TYPCMD = "RspConfigServer"
         infoTest.SERVER_ADDRESS = response.SERVER_ADDRESS
         infoTest.SERVER_MQTT_PORT = response.SERVER_MQTT_PORT
@@ -132,6 +133,7 @@ client.on('message', (topic, payload) => {
       var infoTest2 = {}
       infoTest2.Rqi = rqird
       infoTest2.Vendor_ID = response.Vendor_ID
+      infoTest2.CLIENTID = response.Client_Id
       infoTest2.TYPCMD = "UpConfigServerOk"
       infoTest2.SERVER_ADDRESS = response.SERVER_ADDRESS
       infoTest2.SERVER_MQTT_PORT = response.SERVER_MQTT_PORT
@@ -144,6 +146,7 @@ client.on('message', (topic, payload) => {
       if (
         infoTest2.SERVER_ADDRESS == messageId.SERVER_ADDRESS && 
         infoTest2.Vendor_ID == messageId.Vendor_ID && 
+        infoTest2.CLIENTID == response.Client_Id &&
         infoTest2.SERVER_MQTT_PORT == messageId.SERVER_MQTT_PORT && 
         infoTest2.SERVER_MQTT_USER == messageId.SERVER_MQTT_USER &&
         infoTest2.SERVER_MQTT_PASS == messageId.SERVER_MQTT_PASS &&

@@ -48,6 +48,7 @@ const Lightlist = () => {
                                 <TableRow>
                                     <th>Project</th>
                                     <th>Address</th>
+                                    <th>Client_Id</th>
                                     <th>MQTT Port</th>
                                     <th>MQTT User</th>
                                     <th>MQTT Pass</th>

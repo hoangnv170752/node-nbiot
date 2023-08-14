@@ -2,13 +2,18 @@ import React from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FormGroup, Button } from "react-bootstrap";
+import { useState } from "react";
+import Stack from '@mui/material/Stack';
 
 const LightForm = (props) => {
+    const [selectedOption, setSelectedOption] = useState('');
+    // const [client, setClient] = useState('');
     const validationSchema = Yup.object().shape({
         project: Yup.string()
         // .email("You have enter an invalid email address")
         .required("Required"),
-        vendor: Yup.string().required("Required"),
+        vendor: Yup.string(),
+        CLIENT_ID: Yup.string(),
         SERVER_ADDRESS: Yup.string()
         // .positive("Invalid roll number")
         // .integer("Invalid roll number")
@@ -29,13 +34,32 @@ const LightForm = (props) => {
         .required("Required"),
         MAC: Yup.string()
         .required("Required")
-});
+    });
+    // const getVnptClient = () => {
+    //     var requestOptions = {
+    //         method: 'GET',
+    //         redirect: 'follow'
+    //     };
+        
+    //     fetch("http://localhost:5001/lights/signinvnpt", requestOptions)
+    //     .then(response => response.json())
+    //     .then(result => setClient(result.clientId))
+    //     .catch(error => console.log('error', error));
+    // }
+
+    // React.useEffect(() => {
+    //     getVnptClient();
+    // })
 console.log(props);
 const options = [
     { value: "0", label: "Rạng Đông" },
     { value: "1", label: "VNPT" },
     { value: "2", label: "Viettel" },
-  ];
+];
+const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+    return selectedOption
+};
 return (
 	<div className="form-wrapper">
 	<Formik {...props} validationSchema={validationSchema}>
@@ -54,8 +78,8 @@ return (
                 Thuộc công ty (*VendorId)
                 {/* <Field name="vendor" type="select"
                     className="form-control" /> */}
-                <Field as="select" name="vendor" className='form-control'>
-                    <option value=""> </option> {/* Empty option with no label */}
+                <Field as="select" name="vendor" className='form-control' disabled>
+                    <option value=""> </option> 
                     {options.map(option => (
                     <option key={option.value} value={option.value}>
                         {option.label}
@@ -67,6 +91,24 @@ return (
                     className="d-block invalid-feedback"
                     component="span"
                 />
+            </FormGroup>
+            <FormGroup>
+                Client Id
+                <Stack direction="row" spacing={2}>
+                    {/* {selectedOption !== '1' && */}
+                     <Field name="CLIENT_ID" type="text" className="form-control" disabled/>
+                    {/* selectedOption === '1' &&
+                        <>
+                            <Field name="CLIENT_ID" type="text" className="form-control" value={client}/> 
+                            <Button variant="success" size="lg" block="block" type="submit" onClick={() => {}}>{props.CLIENT_ID}</Button>
+                        </>
+                     */}
+                </Stack>
+                <ErrorMessage
+                name="CLIENT_ID"
+                className="d-block invalid-feedback"
+                component="span"
+            />
             </FormGroup>
             <FormGroup>
                 Địa chỉ server

@@ -8,6 +8,9 @@ var lightSchema = new Schema({
     vendor: {
         type: Number
     },
+    CLIENT_ID: {
+        type: String
+    },
     SERVER_ADDRESS: {
         type: String
     },
