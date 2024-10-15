@@ -9,8 +9,8 @@ program
   .option('-p, --protocol <type>', 'connect protocol: mqtt, mqtts, ws, wss. default is mqtt', 'mqtt')
   .parse(process.argv)
 
-const host = '103.161.181.124'
-const port = '5005'
+const host = '103.116.8.27'
+const port = '5883'
 
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 
