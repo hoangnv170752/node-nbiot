@@ -134,7 +134,7 @@ router.post("/config-light", (req, res, next) => {
 });
 // Add light data 
 axios
-	.get("http://103.116.8.27:5001/lights/")
+	.get("https://node-nbiot.onrender.com/lights/")
 	.then(res => {
 		console.log(`status ${res.status}`);
 		console.log(res);

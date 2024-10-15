@@ -66,7 +66,7 @@ const LightTableRow = (props) => {
 	const deleteLight = () => {
 		axios
 		.delete(
-		"http://103.116.8.27:5001/lights/delete-light/" + _id)
+		"https://node-nbiot.onrender.com/lights/delete-light/" + _id)
 		.then((res) => {
 			if (res.status === 200) {
 				toast.warning("Delete light successfully", {
@@ -80,7 +80,7 @@ const LightTableRow = (props) => {
 		.catch((err) => alert("Something went wrong"));
 	};
 	const HttpConfig = (context) => {
-		axios.get('http://103.116.8.27:5001/lights/light/' + _id)
+		axios.get('https://node-nbiot.onrender.com/lights/light/' + _id)
 			.then(
 				(res) => {
 					if (res.status === 200){

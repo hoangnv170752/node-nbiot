@@ -36,7 +36,7 @@ const Createlight = () => {
     }, []);
 
     const getVnptClient = () => {
-        fetch("http://103.116.8.27:5001/lights/signinvnpt")
+        fetch("https://node-nbiot.onrender.com/lights/signinvnpt")
             .then(response => response.json())
             .then(result => setClient(result.clientId))
             .catch(error => console.error('Error:', error));
@@ -51,7 +51,7 @@ const Createlight = () => {
         lightObject.CLIENT_ID = companyCode === 1 ? client : clientRal;
 
         try {
-            const res = await Axios.post('http://103.116.8.27:5001/lights/create-light', lightObject);
+            const res = await Axios.post('https://node-nbiot.onrender.com/lights/create-light', lightObject);
             if (res.status === 200) {
                 toast.success("Light successfully created!", { position: toast.POSITION.TOP_CENTER });
             } else {
@@ -69,7 +69,7 @@ const Createlight = () => {
 
     const onSubmitFile = () => {
         if (light) {
-            Axios.post('http://103.116.8.27:5001/lights/create-light', light, {
+            Axios.post('https://node-nbiot.onrender.com/lights/create-light', light, {
                 headers: { 'Content-Type': 'application/json' }
             })
                 .then(res => {

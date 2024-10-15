@@ -41,7 +41,7 @@ const LightForm = (props) => {
     //         redirect: 'follow'
     //     };
         
-    //     fetch("http://103.116.8.27:5001/lights/signinvnpt", requestOptions)
+    //     fetch("https://node-nbiot.onrender.com/lights/signinvnpt", requestOptions)
     //     .then(response => response.json())
     //     .then(result => setClient(result.clientId))
     //     .catch(error => console.log('error', error));

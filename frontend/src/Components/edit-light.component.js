@@ -16,7 +16,7 @@ const Editlight = (props) => {
 	const onSubmit = (lightObject) => {
 		axios
 		.put(
-			"http://103.116.8.27:5001/lights/update-light/" +
+			"https://node-nbiot.onrender.com/lights/update-light/" +
 			props.match.params.id,
 			lightObject
 		)
@@ -32,7 +32,7 @@ const Editlight = (props) => {
 	useEffect(() => {
 		axios
 		.get(
-			"http://103.116.8.27:5001/lights/update-light/"
+			"https://node-nbiot.onrender.com/lights/update-light/"
 			+ props.match.params.id
 		)
 		.then((res) => {
