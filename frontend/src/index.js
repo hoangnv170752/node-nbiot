@@ -8,7 +8,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const uri='http://localhost:3000/create-light';
+const uri='http://103.116.8.27:5001/create-light';
 
 root.render(
   // <Auth0Provider

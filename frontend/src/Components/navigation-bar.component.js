@@ -19,7 +19,6 @@ function NavigationBar() {
                 <Container>
                     <Navbar.Brand>
                         <Link to={"/create-light"} className="nav-link">
-                            <img src="http://14.225.13.96:5555/assets/images/logo.png" alt="" width="40" height="44" />
                             NB-IOT MAC
                         </Link>                   
                     </Navbar.Brand>

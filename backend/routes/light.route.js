@@ -134,7 +134,7 @@ router.post("/config-light", (req, res, next) => {
 });
 // Add light data 
 axios
-	.get("http://103.160.2.183:5000/lights/")
+	.get("http://103.116.8.27:5001/lights/")
 	.then(res => {
 		console.log(`status ${res.status}`);
 		console.log(res);
@@ -156,11 +156,12 @@ router.get("/light/:id", (req, res, next) => {
 	});
 })
 
-router.get("/signinvnpt", (req, res, next) => {
+router.post("/signinvnpt", (req, res, next) => {
 	let account = JSON.stringify({
 		"username": "vnptsmartlighting@gmail.com",
 		"password": "!yeE2_Fl01"
 	});
+	var mac = req.body.mac;
 	let config = {
 		method: 'post',
 		maxBodyLength: Infinity,
@@ -175,12 +176,10 @@ router.get("/signinvnpt", (req, res, next) => {
 	axios.request(config)
 	.then((response) => {
 		token = response.data.content.Bearer;
-		console.log(token);
-
 		const configDevice = {
 		method: 'get',
 		maxBodyLength: Infinity,
-		url: 'https://api-iot.vnpt.vn/iotportal/device/token/SML',
+		url: `https://api-iot.vnpt.vn/iotportal/device/token/${mac}`,
 		headers: { 
 			'Authorization': `Bearer ${token}`, 
 			'Cookie': 'BIGipServerPool_14.225.41.69_30234=404202762.6774.0000'
@@ -195,10 +194,11 @@ router.get("/signinvnpt", (req, res, next) => {
 		const parts = encodedString.split(".");
 		const encodedHeader = parts[0];
 		const padding = "=".repeat(4 - (encodedHeader.length % 4));
-		const paddedEncodedString = encodedHeader + padding;
+		const paddedEncodedString = encodedHeader;
+		console.log(padding);
 		// Decode from Base64
 		const decodedBytes = base64.toByteArray(paddedEncodedString);
-		const decodedString = Buffer.from(decodedBytes).toString("utf-8");
+		const decodedString = Buffer.from(decodedBytes).toString("UTF-8");
 		console.log(decodedString);
 		const header = JSON.parse(decodedString);
 		res.json(header);
