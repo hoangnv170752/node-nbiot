@@ -102,6 +102,13 @@ const LightTableRow = (props) => {
 		}
 	}
 
+	const today = new Date();
+	const dd = String(today.getDate()).padStart(2, '0');
+	const mm = String(today.getMonth() + 1).padStart(2, '0');
+	const yyyy = today.getFullYear();
+
+	const formattedDate = dd + mm + yyyy;
+
 	React.useEffect(() => {
 		handleProjectName(vendor);
 	}, [])
@@ -170,7 +177,7 @@ const LightTableRow = (props) => {
 						<QRCode
 							size={256}
 							style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-							value={MAC}
+							value={MAC+'-'+formattedDate+'-'+CSE_ID}
 							viewBox={`0 0 256 256`}
 						/>
 					</Box>
